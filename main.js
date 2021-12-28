@@ -3,6 +3,36 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+// hidding "ERROR" when page loads
+const err = document.querySelector('#modal');
+window.onload = ()=>{err.classList.add('hidden')}
+
+
+
+const hearts = document.querySelectorAll(".like-glyph");
+for(let heart of hearts){
+heart.addEventListener('click', ()=>{
+  mimicServerCall()
+  .then(()=>{
+    if(heart.className ==="like-glyph"){
+      heart.className+= " activated-heart"
+      heart.textContent = FULL_HEART
+    }
+    else{
+      heart.className = "like-glyph"
+      heart.textContent = EMPTY_HEART
+    }
+  })
+  .catch(()=>{
+    err.classList.remove('hidden')
+    setTimeout(()=>{err.classList.add('hidden')},3000)
+  })
+})
+}
+
+
+
+
 
 
 
